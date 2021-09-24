@@ -69,7 +69,7 @@ rl.question(question, (answer) => {
   }
   // 判断远端是否有该分支
   const isTargetExist = exec(`git ls-remote origin ${currentBranch}`)
-  if (isTargetExist.code !== 0) {
+  if (isTargetExist.code !== 1) {
     echoAndExit('执行超时，请重试')
   } else {
     if (!isTargetExist.stdout) {
