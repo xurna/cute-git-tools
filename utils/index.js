@@ -18,7 +18,6 @@ function gitMergeFunc (currentBranch, targetBranch) {
     exec(`git checkout ${targetBranch}`)
     exec(`git pull origin ${targetBranch}`)
     const mergeTarget = exec(`git merge ${currentBranch}`)
-    console.log('---mergeTarget--', mergeTarget)
     // 合并有冲突
     if (mergeTarget.stdout.indexOf('CONFLICT') > 0) {
       console.log(`================= end合并： ${currentBranch} 到 ${targetBranch} 分支 =================`)

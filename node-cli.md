@@ -182,6 +182,7 @@ hello world
   uniq: [Function: bound ]
 }
 ```
+### readline 模块
 
 ## 发布npm包
 1. 登录npm账号，如果没有账号，则去[npm网站注册](https://www.npmjs.com/signup)一个，或者使用`npm adduser`命令，提示输入账号，密码和邮箱，然后将提示创建成功，如果已有账号，则用以下命令登录。

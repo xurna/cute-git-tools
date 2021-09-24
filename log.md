@@ -74,3 +74,25 @@
   uniq: [Function: bound ]
 } 
 ```
+- 合并冲突
+```js
+[String: 'Auto-merging bin/index.js\n' +
+  'CONFLICT (content): Merge conflict in bin/index.js\n' +
+  'Automatic merge failed; fix conflicts and then commit the result.\n'] {
+  stdout: 'Auto-merging bin/index.js\n' +
+    'CONFLICT (content): Merge conflict in bin/index.js\n' +
+    'Automatic merge failed; fix conflicts and then commit the result.\n',
+  stderr: '',
+  code: 1,
+  cat: [Function: bound ],
+  exec: [Function: bound ],
+  grep: [Function: bound ],
+  head: [Function: bound ],
+  sed: [Function: bound ],
+  sort: [Function: bound ],
+  tail: [Function: bound ],
+  to: [Function: bound ],
+  toEnd: [Function: bound ],
+  uniq: [Function: bound ]
+}
+```
