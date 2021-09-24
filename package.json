@@ -21,7 +21,7 @@
         "url": "git+https://github.com/xurna/study-project.git"
     },
     "lint-staged": {
-        "*{.js,ts,vue}": "eslint . --fix --max-warnings 0"
+        "**/*": "eslint . --fix --max-warnings 0"
     },
     "dependencies": {
         "path": "0.12.7",

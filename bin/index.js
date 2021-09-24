@@ -64,8 +64,7 @@ rl.question(question, (answer) => {
     exec('git add .')
   }
   const commitStatus = exec(`git commit -m "${commit}"`)
-  console.log('husky', commitStatus.stdout, commitStatus.stdout.indexOf('problem'), commitStatus.stdout.indexOf('error'))
-  if (commitStatus.stdout.indexOf('problem') > 0 || commitStatus.stdout.indexOf('error') > 0) {
+  if (commitStatus.code !== 0) {
     echoAndExit('eslint 不通过，请修改后提交')
   }
   // 判断远端是否有该分支
