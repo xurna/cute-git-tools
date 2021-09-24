@@ -65,7 +65,7 @@ rl.question(question, (answer) => {
   }
   const commitStatus = exec(`git commit -m "${commit}"`)
   console.log('---commitStatus---', commitStatus)
-  if (commitStatus.code !== 0) {
+  if (commitStatus.stderr.indexOf('problem') > 0 || commitStatus.stderr.indexOf('error') > 0) {
     echoAndExit('eslint 不通过，请修改后提交')
   }
   // 判断远端是否有该分支
