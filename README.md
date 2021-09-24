@@ -11,7 +11,7 @@ or
 npm install -g git-auto-commit
 ```
 
-## 语法
+## 查看帮助
 命令行输入：git-auto-commit --help
 ```
 Usage: git-auto-commit [options]
@@ -20,17 +20,16 @@ Usage: git-auto-commit [options]
       --version  显示版本号                                               [布尔]
       --add      是否手动执行git add命令，默认--add=auto，执行本脚本自动执行“git
                  add .”；若--add=manual，执行该脚本前需手动执行git add命令
-  -m, --commit   当前提交的注释，如commit有空格，需要加双引号，如-m="feature:
-                 xxx"
+  -m, --commit   当前提交的注释，如commit中间有空格，需要加双引号，如-m="feature: xxx"
   -t, --target   目标分支，基础分支，支持一个
       --sit      部署分支，支持多个，用英文逗号隔开，如test1,test2
       --help     显示帮助信息                                             [布尔]
 
 示例：
-  git-auto-commit --add=manual                    脚本不自动执行"git add ."，执行节本前可根据情况自己手动执行git add命令
+  git-auto-commit --add=manual                    脚本不自动执行"git add ."，执行脚本前可根据情况自己手动执行git add命令
 
-  git-auto-commit --commit="feat: 新增功能"        当前分支合并到target，target分别合并
-  --target=feature --sit=wxzy_dev,h5zy_dev  到sit分支
+  git-auto-commit --commit="feat: 新增功能"        当前分支合并到target，target分别合并到sit分支
+  --target=feature --sit=wxzy_dev,h5zy_dev        
 
   git-auto-commit --commit="feat: 新增功能"        只合到target分支
   --target=feature
@@ -50,7 +49,7 @@ Usage: git-auto-commit [options]
 git-auto-commit -m='feat: 优化' --target=feature --sit=wxzy_dev,h5zy_dev
 ```
 ### 在package.json中的script定义
-推荐（多人开发）：在package.json下新建配置文件，使用`--config`定义文件位置，后续只需修改文件中的内容，再执行`npm run merge:config`即可自动化提交代码
+推荐（多人开发）：在package.json下新建配置文件，使用`--config`定义文件位置，后续只需修改文件中的内容，再执行`npm run merge`即可自动化提交代码
 ```
 // git-auto-commit.config.json
 {
@@ -67,7 +66,7 @@ git-auto-commit -m='feat: 优化' --target=feature --sit=wxzy_dev,h5zy_dev
   },
 }
 ```
-或者：直接把执行参数显式放在命令中，然后执行`npm run merge`即可自动化提交代码
+或者：直接把执行参数显式放在命令中，然后执行`npm run merge:cli`即可自动化提交代码
 ```
 // package.json
 {
