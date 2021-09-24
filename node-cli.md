@@ -43,7 +43,7 @@ hello world
 - 执行[npm link](https://docs.npmjs.com/cli/v7/commands/npm-link)：本地开发npm模块时，将npm模块链接到对应的运行项目中去，方便地对模块进行调试和测试。
     - 具体用法：
         1. 项目和模块在同一个目录下，可以使用相对路径，这样它映射的是目录名称：`npm link ../module`
-        2. 项目和模块不在同一个目录下[教程](https://www.jianshu.com/p/aaa7db89a5b2)
+        2. 项目和模块不在同一个目录下[示例](https://www.jianshu.com/p/aaa7db89a5b2)
         - 先cd到模块目录，npm link，会取package-name进行映射，创建全局link
         - 然后cd到项目目录（引用模块的地方），npm link 模块名(package.json中的name包名和package.json中bin中命令都会隐射)
           ```js
@@ -56,7 +56,7 @@ hello world
         - 解除项目和模块link，项目目录下，npm uninstall 模块名
         - 解除模块全局link，模块目录下，npm uninstall -g 模块名
 
-在项目根目录下执行：`npm link`，可以看到我本地bin下的`git-auto-commit`命令映射到`lib/node_modules/@cute/git-auto-commit/bin/index.js`中，而`lib/node_modules/@cute/git-auto-commit`隐射到开发目录，这样，只要开发目录修改，执行命令行时就同步执行修改过的代码了，不用手动安装新的npm包，方便本地调试。
+在项目根目录下执行：`npm link`，可以看到本地bin下的`git-auto-commit`命令映射到`lib/node_modules/@cute/git-auto-commit/bin/index.js`中，而`lib/node_modules/@cute/git-auto-commit`隐射到开发目录，这样，只要开发目录修改，执行命令行时就同步执行修改过的代码了，不用手动安装新的npm包，方便本地调试。
 ```js
 audited 39 packages in 1.375s
 
@@ -68,7 +68,7 @@ found 0 vulnerabilities
 /usr/local/bin/git-auto-commit -> /usr/local/lib/node_modules/@cute/git-auto-commit/bin/index.js
 /usr/local/lib/node_modules/@cute/git-auto-commit -> /Users/xxx/project/node-cli
 ```
-- 执行命令行：执行后`npm link`后，建立映射关系连接，就可以直接用bin下的模块名直接执行命令了。
+- 执行后`npm link`后，建立映射关系连接，就可以直接用bin下的模块名直接执行命令了。
 ```js
 git-auto-commit
 ```
@@ -94,7 +94,7 @@ console.log(process.argv);
   '--name=hello'
 ]
 ```
-### yargs 模板
+### yargs 模块
 `yargs`通过解析参数和生成优雅的用户界面来构建交互式命令行工具。
 安装：
 ```
@@ -183,6 +183,35 @@ hello world
 }
 ```
 ### readline 模块
+[`readline`](http://nodejs.cn/api/readline.html)模块提供了用于从可读流（例如 process.stdin）每次一行地读取数据的接口。
+安装：
+```
+npm install --save readline
+```
+示例：可以用来读取用户输入
+```js
+#!/usr/bin/env node
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+rl.question('What do you think of Node.js? ', (answer) => {
+  console.log(`Thank you for your valuable feedback: ${answer}`);
+  rl.close();
+});
+```
+执行：
+```
+./index.js
+```
+输出：
+```
+What do you think of Node.js? Nice
+Thank you for your valuable feedback: Nice
+```
 
 ## 发布npm包
 1. 登录npm账号，如果没有账号，则去[npm网站注册](https://www.npmjs.com/signup)一个，或者使用`npm adduser`命令，提示输入账号，密码和邮箱，然后将提示创建成功，如果已有账号，则用以下命令登录。
@@ -209,7 +238,6 @@ npm config set registry https://registry.npm.taobao.org
 ```
 
 ## 参考文档：
-- [如何从0开始用node写一个自己的命令行程序](https://www.jb51.net/article/153745.htm)
 - [Node.js 命令行程序开发教程](http://www.ruanyifeng.com/blog/2015/05/command-line-with-node.html)
 - [shelljs](http://documentup.com/shelljs/shelljs#command-line-use)
 - [Building a simple command line tool with npm](https://blog.npmjs.org/post/118810260230/building-a-simple-command-line-tool-with-npm)
