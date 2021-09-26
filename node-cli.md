@@ -66,7 +66,7 @@ audited 39 packages in 1.375s
 found 0 vulnerabilities
 
 /usr/local/bin/git-auto-commit -> /usr/local/lib/node_modules/@cute/git-auto-commit/bin/index.js
-/usr/local/lib/node_modules/@cute/git-auto-commit -> /Users/xxx/project/node-cli
+/usr/local/lib/node_modules/@cute/git-auto-commit -> /Users/xxx/project/git-auto-commit
 ```
 - 执行后`npm link`后，建立映射关系连接，就可以直接用bin下的模块名直接执行命令了。
 ```js
@@ -90,7 +90,7 @@ console.log(process.argv);
 ```js
 [
   '/usr/local/bin/node',
-  '/Users/xxxx/project/node-cli/index.js',
+  '/Users/xxxx/project/git-auto-commit/index.js',
   '--name=hello'
 ]
 ```
