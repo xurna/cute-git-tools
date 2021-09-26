@@ -8,7 +8,7 @@
     },
     "scripts": {
         "merge": "git-auto-commit --config=./git-auto-commit.config.json",
-        "merge:cli": "git-auto-commit -m='feat: 优化' --target=master --sit=wxzy_dev,h5zy_dev"
+        "merge:cli": "git-auto-commit -m='feat: 优化' --target=master --sit=wx_dev,h5_dev"
     },
     "author": "xiaonayang",
     "license": "MIT",

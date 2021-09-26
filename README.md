@@ -31,13 +31,13 @@ Usage: git-auto-commit [options]
   git-auto-commit --add=manual                    脚本不自动执行"git add ."，执行脚本前可根据情况自己手动执行git add命令
 
   git-auto-commit --commit="feat: 新增功能"        当前分支合并到target，target分别合并到sit分支
-  --target=feature --sit=wxzy_dev,h5zy_dev        
+  --target=feature --sit=wx_dev,h5_dev        
 
   git-auto-commit --commit="feat: 新增功能"        只合到target分支
   --target=feature
 
   git-auto-commit --commit="feat: 新增功能"        只合到sit分支
-  --sit=wxzy_dev,h5zy_dev
+  --sit=wx_dev,h5_dev
 
   git-auto-commit --commit="feat: 新增功能"        只提交代码
 
@@ -48,7 +48,7 @@ Usage: git-auto-commit [options]
 ### 使用命令行形式
 在命令行中直接手动执行：
 ```
-git-auto-commit -m='feat: 优化' --target=feature --sit=wxzy_dev,h5zy_dev
+git-auto-commit -m='feat: 优化' --target=feature --sit=wx_dev,h5_dev
 ```
 ### 在package.json中的script定义
 推荐（多人开发）：在package.json下新建配置文件，使用`--config`定义文件位置，后续只需修改文件中的内容，再执行`npm run merge`即可自动化提交代码
@@ -57,7 +57,7 @@ git-auto-commit -m='feat: 优化' --target=feature --sit=wxzy_dev,h5zy_dev
 {
     "commit": "feat: 使用config配置",
     "target": "feature",
-    "sit": "wxzy_dev,h5zy_dev"
+    "sit": "wx_dev,h5_dev"
 }
 ```
 ```
@@ -73,7 +73,7 @@ git-auto-commit -m='feat: 优化' --target=feature --sit=wxzy_dev,h5zy_dev
 // package.json
 {
   "scripts": {
-    "merge:cli": "git-auto-commit -m='feat: 优化' --target=feature --sit=wxzy_dev,h5zy_dev"
+    "merge:cli": "git-auto-commit -m='feat: 优化' --target=feature --sit=wx_dev,h5_dev"
   },
 }
 ```
@@ -100,12 +100,12 @@ git-auto-commit -m='feat: 优化' --target=feature --sit=test
 
 ## 执行过程
 ```js
-➜ git-auto-commit -m="feat: 新增功能" -t=feature/0715 --sit=wxzy_dev,h5zy_dev
+➜ git-auto-commit -m="feat: 新增功能" -t=feature/0715 --sit=wx_dev,h5_dev
 ================= 自动化提交git脚本即将开始执行 =================
 -> git symbolic-ref --short HEAD
 dev/0715
 -> 
--> 信息确认: dev/0715 -> feature/0715 -> wxzy_dev,h5zy_dev [Y/N] ? Y
+-> 信息确认: dev/0715 -> feature/0715 -> wx_dev,h5_dev [Y/N] ? Y
 ================= start提交当前分支代码 =================
 -> git status
 On branch dev/0715
@@ -170,17 +170,17 @@ To git.xxxx.com:health/xxxx.git
    b5a2baf9e..adf03d2e7  feature/0715 -> feature/0715
 ================= end合并： dev/0715 到 feature/0715 分支 =================
 ~~~~~~~~~~~~~~~ feature/0715 merge success! ~~~~~~~~~~~~~~~
-================= start合并： feature/0715 到 wxzy_dev 分支 =================
--> git ls-remote origin wxzy_dev
-7f51663bf5551c321e4ed759fef05aba4c079d62        refs/heads/wxzy_dev
--> git checkout wxzy_dev
-Switched to branch 'wxzy_dev'
-Your branch is behind 'origin/wxzy_dev' by 1 commit, and can be fast-forwarded.
+================= start合并： feature/0715 到 wx_dev 分支 =================
+-> git ls-remote origin wx_dev
+7f51663bf5551c321e4ed759fef05aba4c079d62        refs/heads/wx_dev
+-> git checkout wx_dev
+Switched to branch 'wx_dev'
+Your branch is behind 'origin/wx_dev' by 1 commit, and can be fast-forwarded.
   (use "git pull" to update your local branch)
--> git pull origin wxzy_dev
+-> git pull origin wx_dev
 From git.xxxx.com:health/xxxx
- * branch                wxzy_dev   -> FETCH_HEAD
-   69f2e6474..7f51663bf  wxzy_dev   -> origin/wxzy_dev
+ * branch                wx_dev   -> FETCH_HEAD
+   69f2e6474..7f51663bf  wx_dev   -> origin/wx_dev
 Updating ad5a2c8d6..7f51663bf
 Fast-forward
  src/components/Agreement.vue                       |   1 -
@@ -190,20 +190,20 @@ husky > commit-msg (node v14.5.0)
 Merge made by the 'recursive' strategy.
  src/pages/web/eduFund/moudles/insuranceForm.vue | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
--> git push origin wxzy_dev
+-> git push origin wx_dev
 To git.xxxx.com:health/xxxx.git
-   7f51663bf..d878f626e  wxzy_dev -> wxzy_dev
-================= end合并： feature/0715 到 wxzy_dev 分支 =================
-================= start合并： feature/0715 到 h5zy_dev 分支 =================
--> git ls-remote origin h5zy_dev
-739171302f2fd18c3beddc9e3a2bcdc0dc9b38a6        refs/heads/h5zy_dev
--> git checkout h5zy_dev
-Switched to branch 'h5zy_dev'
-Your branch is up to date with 'origin/h5zy_dev'.
--> git pull origin h5zy_dev
+   7f51663bf..d878f626e  wx_dev -> wx_dev
+================= end合并： feature/0715 到 wx_dev 分支 =================
+================= start合并： feature/0715 到 h5_dev 分支 =================
+-> git ls-remote origin h5_dev
+739171302f2fd18c3beddc9e3a2bcdc0dc9b38a6        refs/heads/h5_dev
+-> git checkout h5_dev
+Switched to branch 'h5_dev'
+Your branch is up to date with 'origin/h5_dev'.
+-> git pull origin h5_dev
 From git.xxxx.com:health/xxxx
- * branch                h5zy_dev   -> FETCH_HEAD
-   8e901ff23..739171302  h5zy_dev   -> origin/h5zy_dev
+ * branch                h5_dev   -> FETCH_HEAD
+   8e901ff23..739171302  h5_dev   -> origin/h5_dev
 Updating 8e901ff23..739171302
 Fast-forward
  src/components/Agreement.vue                       |   1 -
@@ -213,13 +213,13 @@ husky > commit-msg (node v14.5.0)
 Merge made by the 'recursive' strategy.
  src/pages/web/eduFund/moudles/insuranceForm.vue | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
--> git push origin h5zy_dev
+-> git push origin h5_dev
 To git.xxxx.com:health/xxxx.git
-   739171302..3bb601284  h5zy_dev -> h5zy_dev
-================= end合并： feature/0715 到 h5zy_dev 分支 =================
+   739171302..3bb601284  h5_dev -> h5_dev
+================= end合并： feature/0715 到 h5_dev 分支 =================
 [
-  '~~~~~~~~~~~~~~~ wxzy_dev merge success! ~~~~~~~~~~~~~~~',
-  '~~~~~~~~~~~~~~~ h5zy_dev merge success! ~~~~~~~~~~~~~~~'
+  '~~~~~~~~~~~~~~~ wx_dev merge success! ~~~~~~~~~~~~~~~',
+  '~~~~~~~~~~~~~~~ h5_dev merge success! ~~~~~~~~~~~~~~~'
 ]
 ```
 
