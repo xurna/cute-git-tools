@@ -13,12 +13,12 @@
     "author": "xiaonayang",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/xurna/git-auto-commit/issues"
+        "url": "https://github.com/xurna/cute-git-tools/issues"
     },
-    "homepage": "https://github.com/xurna/git-auto-commit#readme",
+    "homepage": "https://github.com/xurna/cute-git-tools#readme",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/xurna/git-auto-commit.git"
+        "url": "git+https://github.com/xurna/cute-git-tools.git"
     },
     "lint-staged": {
         "*{.js,ts,vue}": "eslint . --fix --max-warnings 0"

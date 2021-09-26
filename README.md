@@ -6,9 +6,9 @@
 - [git](https://git-scm.com/downloads)
 ## 安装
 ```
-npm install --save git-auto-commit
+npm install --save cute-git-tools
 or
-npm install -g git-auto-commit
+npm install -g cute-git-tools
 ```
 
 ## 查看帮助
