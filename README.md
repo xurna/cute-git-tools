@@ -6,7 +6,7 @@
 - [git](https://git-scm.com/downloads)
 ## 安装
 ```
-npm install --save cute-git-tools
+npm install --save-dev cute-git-tools
 or
 npm install -g cute-git-tools
 ```
