@@ -96,3 +96,13 @@
   uniq: [Function: bound ]
 }
 ```
+- 代码自动保存
+本地代码设置了eslint后，可以设置vscode的`settings.json`这边本地保存的时候可以根据eslint配置自动格式化
+```
+{
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    },
+}
+```

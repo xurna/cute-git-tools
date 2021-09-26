@@ -11,7 +11,7 @@
         "merge:cli": "git-auto-commit -m='feat: 优化' --target=master --sit=wxzy_dev,h5zy_dev"
     },
     "author": "xiaonayang",
-    "license": "ISC",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/xurna/git-auto-commit/issues"
     },
