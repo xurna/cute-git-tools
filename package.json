@@ -1,6 +1,6 @@
 {
     "name": "cute-git-tools",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "git自动化提交代码合并分支",
     "main": "./bin/index.js",
     "bin": {
