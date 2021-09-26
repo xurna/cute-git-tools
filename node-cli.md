@@ -34,7 +34,7 @@ hello world
 ```js
 // package.json
 {
-  "name": "@cute/git-auto-commit"
+  "name": "cute-git-tools"
   "bin": {
     "git-auto-commit": "./index.js"
   },
@@ -56,7 +56,7 @@ hello world
         - 解除项目和模块link，项目目录下，npm uninstall 模块名
         - 解除模块全局link，模块目录下，npm uninstall -g 模块名
 
-在项目根目录下执行：`npm link`，可以看到本地bin下的`git-auto-commit`命令映射到`lib/node_modules/@cute/git-auto-commit/bin/index.js`中，而`lib/node_modules/@cute/git-auto-commit`隐射到开发目录，这样，只要开发目录修改，执行命令行时就同步执行修改过的代码了，不用手动安装新的npm包，方便本地调试。
+在项目根目录下执行：`npm link`，可以看到本地bin下的`git-auto-commit`命令映射到`lib/node_modules/cute-git-tools/bin/index.js`中，而`lib/node_modules/cute-git-tools`隐射到开发目录，这样，只要开发目录修改，执行命令行时就同步执行修改过的代码了，不用手动安装新的npm包，方便本地调试。
 ```js
 audited 39 packages in 1.375s
 
@@ -65,8 +65,8 @@ audited 39 packages in 1.375s
 
 found 0 vulnerabilities
 
-/usr/local/bin/git-auto-commit -> /usr/local/lib/node_modules/@cute/git-auto-commit/bin/index.js
-/usr/local/lib/node_modules/@cute/git-auto-commit -> /Users/xxx/project/git-auto-commit
+/usr/local/bin/git-auto-commit -> /usr/local/lib/node_modules/cute-git-tools/bin/index.js
+/usr/local/lib/node_modules/cute-git-tools -> /Users/xxx/project/git-auto-commit
 ```
 - 执行后`npm link`后，建立映射关系连接，就可以直接用bin下的模块名直接执行命令了。
 ```js
@@ -214,7 +214,7 @@ Thank you for your valuable feedback: Nice
 ```
 
 ## 发布npm包
-1. 登录npm账号，如果没有账号，则去[npm网站注册](https://www.npmjs.com/signup)一个，或者使用`npm adduser`命令，提示输入账号，密码和邮箱，然后将提示创建成功，如果已有账号，则用以下命令登录。
+1. 登录npm账号，如果没有账号，则去[npm网站注册](https://www.npmjs.com/signup)一个，或者使用`npm adduser`命令，提示输入账号，密码和邮箱，然后将提示创建成功，如果已有账号，则用以下命令登录。查看是否登录：`npm whoami`。
 ```
 npm login
 // 如果npm login或者npm adduser时报如下错误：npm ERR! 404 Registry returned 404 for PUT on undefined

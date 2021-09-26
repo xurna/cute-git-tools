@@ -1,10 +1,10 @@
 {
-    "name": "@cute/git-auto-commit",
+    "name": "cute-git-tools",
     "version": "1.0.0",
     "description": "git自动化提交代码合并分支",
     "main": "./bin/index.js",
     "bin": {
-        "git-auto-commit": "./bin/index.js"
+        "git-auto-commit": "bin/index.js"
     },
     "scripts": {
         "merge": "git-auto-commit --config=./git-auto-commit.config.json",
