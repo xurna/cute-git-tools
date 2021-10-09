@@ -4,4 +4,4 @@
 
 # v1.0.3 
 ## first release
-This is the first release, tracked cute-git-tools v1.0.3、、
+This is the first release, tracked cute-git-tools v1.0.3
