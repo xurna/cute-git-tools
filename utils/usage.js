@@ -22,6 +22,7 @@ const argv = yargs(hideBin(process.argv))
     describe: '目标分支，基础分支，支持一个'
   })
   .option('sit', {
+    alias: 's',
     describe: '部署分支，支持多个，用英文逗号隔开，如test1,test2',
     demandOption: false
   })

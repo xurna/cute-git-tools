@@ -24,7 +24,7 @@ Usage: git-auto-commit [options]
                  add .”；若--add=manual，执行该脚本前需手动执行git add命令
   -m, --commit   当前提交的注释，如commit中间有空格，需要加双引号，如-m="feature: xxx"
   -t, --target   目标分支，基础分支，支持一个
-      --sit      部署分支，支持多个，用英文逗号隔开，如test1,test2
+  -s, --sit      部署分支，支持多个，用英文逗号隔开，如test1,test2
       --help     显示帮助信息                                             [布尔]
 
 示例：
@@ -48,7 +48,7 @@ Usage: git-auto-commit [options]
 ### 使用命令行形式
 在命令行中直接手动执行：
 ```
-git-auto-commit -m='feat: 优化' --target=feature --sit=wx_dev,h5_dev
+git-auto-commit -m='feat: 优化' -t=feature -s=wx_dev,h5_dev
 ```
 ### 在package.json中的script定义
 推荐（多人开发）：在package.json下新建配置文件，使用`--config`定义文件位置，后续只需修改文件中的内容，再执行`npm run merge`即可自动化提交代码
@@ -88,7 +88,7 @@ git-auto-commit -m='feat: 优化' --target=feature --sit=wx_dev,h5_dev
 ```
 则上面实际上相当于执行命令
 ```
-git-auto-commit -m='feat: 优化' --target=feature --sit=test
+git-auto-commit -m='feat: 优化' -t=feature -s=test
 ```
 
 ## 注意

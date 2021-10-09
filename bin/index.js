@@ -52,12 +52,13 @@ if (target) {
 // 信息确认
 rl.question(chalk.cyanBright(TAG, question), (answer) => {
   if (answer !== 'Y') {
+    console.log(chalk.cyanBright(TAG, '执行已取消'))
     rl.close()
     shell.exit(1)
   }
 
   // 提交当前分支
-  console.log(chalk.greenBright(TAG, 'start提交当前分支代码'))
+  console.log(chalk.greenBright(TAG, `start -> 提交当前分支 ${currentBranch} 代码`))
   const currentStatus = exec('git status')
   if (currentStatus.stdout.indexOf('nothing to commit') === -1 && !commit) {
     echoAndExit('当前分支未提交，commit内容未指定，请用 --commit或-m 参数指定')
@@ -80,11 +81,11 @@ rl.question(chalk.cyanBright(TAG, question), (answer) => {
       isTimeout(exec(`git push origin ${currentBranch}`))
     }
   }
-  console.log(chalk.greenBright(TAG, 'end提交当前分支代码'))
+  console.log(chalk.greenBright(TAG, `end <- 提交当前分支 ${currentBranch} 代码`))
 
   // 合并到target分支
   gitMergeFunc(currentBranch, target).then((targetResult) => {
-    targetResult && console.log(targetResult)
+    targetResult && console.log(chalk.yellow(TAG, targetResult))
     // 合并到部署分支
     const promiseFunc = []
     if (sitArr.length > 0) {
@@ -93,8 +94,9 @@ rl.question(chalk.cyanBright(TAG, question), (answer) => {
         promiseFunc.push(gitMergeFunc(target || currentBranch, sitBranch))
       }
       Promise.all(promiseFunc).then((deployResult) => {
-        console.log(deployResult) // ['success','failed']
+        console.log(chalk.yellow(TAG, deployResult)) // ['success','failed']
         exec(`git checkout ${currentBranch}`)
+        console.log(chalk.cyanBright(TAG, '执行结束')) // ['success','failed']
         shell.exit(1)
       }).catch((err) => {
         rl.close()
@@ -102,6 +104,7 @@ rl.question(chalk.cyanBright(TAG, question), (answer) => {
       })
     } else {
       exec(`git checkout ${currentBranch}`)
+      console.log(chalk.cyanBright(TAG, '执行结束')) // ['success','failed']
       rl.close()
       shell.exit(1)
     }
