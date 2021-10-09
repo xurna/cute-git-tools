@@ -100,16 +100,16 @@ git-auto-commit -m='feat: 优化' -t=feature -s=test
 
 ## 执行过程
 ```js
-➜ git-auto-commit -m="feat: 新增功能" -t=feature/0715 --sit=wx_dev,h5_dev
-================= 自动化提交git脚本即将开始执行 =================
--> git symbolic-ref --short HEAD
-dev/0715
--> 
--> 信息确认: dev/0715 -> feature/0715 -> wx_dev,h5_dev [Y/N] ? Y
-================= start提交当前分支代码 =================
--> git status
-On branch dev/0715
-Your branch is up to date with 'origin/dev/0715'.
+➜ git-auto-commit -m="feat: 优化" -t=feature/1019 -s=wx_dev,h5_dev
+[git-auto-commit] 当前执行命令参数：{"_":[],"m":"feat: 优化","commit":"feat: 优化","t":"feature/1019","target":"feature/1019","s":"wx_dev,h5_dev","sit":"wx_dev,h5_dev","$0":"git-auto-commit"}
+[git-auto-commit] 自动化提交git脚本即将开始执行
+[git-auto-commit] git symbolic-ref --short HEAD
+dev/1019
+[git-auto-commit] 分支流合并信息确认: dev/1019 -> feature/1019 -> wx_dev,h5_dev [Y/N] ? Y
+[git-auto-commit] start -> 提交当前分支 dev/1019 代码
+[git-auto-commit] git status
+On branch dev/1019
+Your branch is up to date with 'origin/dev/1019'.
 
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
@@ -117,8 +117,8 @@ Changes not staged for commit:
         modified:   src/pages/web/index.vue
 
 no changes added to commit (use "git add" and/or "git commit -a")
--> git add .
--> git commit -m "feat: 新增功能"
+[git-auto-commit] git add .
+[git-auto-commit] git commit -m "feat: 优化"
 husky > pre-commit (node v14.5.0)
 [STARTED] Preparing...
 [SUCCESS] Preparing...
@@ -137,89 +137,85 @@ husky > pre-commit (node v14.5.0)
 [STARTED] Cleaning up...
 [SUCCESS] Cleaning up...
 husky > commit-msg (node v14.5.0)
-[dev/0715 b6549a563] feat: 新增功能
+[dev/1019 6edd78b28] feat: 优化
  1 file changed, 1 insertion(+), 1 deletion(-)
--> git ls-remote origin dev/0715
-45b13da39da829c3036eeaf0e331118e1c39393f        refs/heads/dev/0715
--> git push origin dev/0715
-To git.xxxx.com:health/xxxx.git
-   45b13da39..b6549a563  dev/0715 -> dev/0715
-================= end提交当前分支代码 =================
-================= start合并： dev/0715 到 feature/0715 分支 =================
--> git ls-remote origin feature/0715
-b5a2baf9efc77f26e981a3fa711b39c9c5facc5a        refs/heads/feature/0715
--> git checkout feature/0715
-Switched to branch 'feature/0715'
-Your branch is up to date with 'origin/feature/0715'.
--> git pull origin feature/0715
-From git.xxxx.com:health/xxxx
- * branch                feature/0715 -> FETCH_HEAD
-   45b13da39..b5a2baf9e  feature/0715 -> origin/feature/0715
-Updating 45b13da39..b5a2baf9e
+[git-auto-commit] git ls-remote origin dev/1019
+e14688e1f95ada3e397bebc9732d201ae8bdbba5        refs/heads/dev/1019
+[git-auto-commit] git push origin dev/1019
+To git.xxx.com:xxx/xxxx.git
+   e14688e1f..6edd78b28  dev/1019 -> dev/1019
+[git-auto-commit] end <- 提交当前分支 dev/1019 代码
+[git-auto-commit] start -> 合并： dev/1019 到 feature/1019 分支
+[git-auto-commit] git ls-remote origin feature/1019
+e14688e1f95ada3e397bebc9732d201ae8bdbba5        refs/heads/feature/1019
+[git-auto-commit] git checkout feature/1019
+Switched to branch 'feature/1019'
+Your branch is up to date with 'origin/feature/1019'.
+[git-auto-commit] git pull origin feature/1019
+From git.xxx.com:xxx/xxxx
+ * branch                feature/1019 -> FETCH_HEAD
+Already up to date.
+[git-auto-commit] git merge dev/1019
+Updating e14688e1f..6edd78b28
 Fast-forward
- src/pages/web/index.vue | 2 ++
- src/pages/web/xx/info.vue  | 6 +++---
- 2 files changed, 5 insertions(+), 3 deletions(-)
--> git merge dev/0715
+ src/pages/web/index.vue | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+[git-auto-commit] git push origin feature/1019
+To git.xxx.com:xxx/xxxx.git
+   e14688e1f..6edd78b28  feature/1019 -> feature/1019
+[git-auto-commit] end <- 合并： dev/1019 到 feature/1019 分支
+[git-auto-commit] feature/1019 merge success!
+[git-auto-commit] start -> 合并： feature/1019 到 wx_dev 分支
+[git-auto-commit] git ls-remote origin wx_dev
+8325c49fab8d563b2d2a716a70fe4aee4d4ffa4e        refs/heads/wx_dev
+[git-auto-commit] git checkout wx_dev
+Switched to branch 'wx_dev'
+Your branch is up to date with 'origin/wx_dev'.
+[git-auto-commit] git pull origin wx_dev
+From git.xxx.com:xxx/xxxx
+ * branch                wx_dev   -> FETCH_HEAD
+   8336294e8..8325c49fa  wx_dev   -> origin/wx_dev
+Updating 8336294e8..8325c49fa
+Fast-forward
+ src/constants/buttons.js                        |  67 +++
+ 1 files changed, 67 insertions(+), 60 deletions(-)
+[git-auto-commit] git merge feature/1019
 husky > commit-msg (node v14.5.0)
 Merge made by the 'recursive' strategy.
  src/pages/web/index.vue | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
--> git push origin feature/0715
-To git.xxxx.com:health/xxxx.git
-   b5a2baf9e..adf03d2e7  feature/0715 -> feature/0715
-================= end合并： dev/0715 到 feature/0715 分支 =================
-~~~~~~~~~~~~~~~ feature/0715 merge success! ~~~~~~~~~~~~~~~
-================= start合并： feature/0715 到 wx_dev 分支 =================
--> git ls-remote origin wx_dev
-7f51663bf5551c321e4ed759fef05aba4c079d62        refs/heads/wx_dev
--> git checkout wx_dev
-Switched to branch 'wx_dev'
-Your branch is behind 'origin/wx_dev' by 1 commit, and can be fast-forwarded.
-  (use "git pull" to update your local branch)
--> git pull origin wx_dev
-From git.xxxx.com:health/xxxx
- * branch                wx_dev   -> FETCH_HEAD
-   69f2e6474..7f51663bf  wx_dev   -> origin/wx_dev
-Updating ad5a2c8d6..7f51663bf
-Fast-forward
- src/components/Agreement.vue                       |   1 -
- 1 files changed, 113 insertions(+), 104 deletions(-)
--> git merge feature/0715
-husky > commit-msg (node v14.5.0)
-Merge made by the 'recursive' strategy.
- src/pages/web/eduFund/moudles/insuranceForm.vue | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
--> git push origin wx_dev
-To git.xxxx.com:health/xxxx.git
-   7f51663bf..d878f626e  wx_dev -> wx_dev
-================= end合并： feature/0715 到 wx_dev 分支 =================
-================= start合并： feature/0715 到 h5_dev 分支 =================
--> git ls-remote origin h5_dev
-739171302f2fd18c3beddc9e3a2bcdc0dc9b38a6        refs/heads/h5_dev
--> git checkout h5_dev
+[git-auto-commit] git push origin wx_dev
+To git.xxx.com:xxx/xxxx.git
+   8325c49fa..fb39f4eeb  wx_dev -> wx_dev
+[git-auto-commit] end <- 合并： feature/1019 到 wx_dev 分支
+[git-auto-commit] start -> 合并： feature/1019 到 h5_dev 分支
+[git-auto-commit] git ls-remote origin h5_dev
+9fe90a202ff348dcfab5f6b34fec24ce0491d480        refs/heads/h5_dev
+[git-auto-commit] git checkout h5_dev
 Switched to branch 'h5_dev'
 Your branch is up to date with 'origin/h5_dev'.
--> git pull origin h5_dev
-From git.xxxx.com:health/xxxx
+[git-auto-commit] git pull origin h5_dev
+From git.xxx.com:xxx/xxxx
  * branch                h5_dev   -> FETCH_HEAD
-   8e901ff23..739171302  h5_dev   -> origin/h5_dev
-Updating 8e901ff23..739171302
+   fe6717d23..9fe90a202  h5_dev   -> origin/h5_dev
+Updating fe6717d23..9fe90a202
 Fast-forward
- src/components/Agreement.vue                       |   1 -
- 1 files changed, 111 insertions(+), 101 deletions(-)
--> git merge feature/0715
+ src/constants/buttons.js                        |  7 +++
+ 1 files changed, 7 insertions(+), 57 deletions(-)
+ create mode 100644 src/pages/web/index.vue
+[git-auto-commit] git merge feature/1019
 husky > commit-msg (node v14.5.0)
 Merge made by the 'recursive' strategy.
- src/pages/web/eduFund/moudles/insuranceForm.vue | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
--> git push origin h5_dev
-To git.xxxx.com:health/xxxx.git
-   739171302..3bb601284  h5_dev -> h5_dev
-================= end合并： feature/0715 到 h5_dev 分支 =================
-[
-  '~~~~~~~~~~~~~~~ wx_dev merge success! ~~~~~~~~~~~~~~~',
-  '~~~~~~~~~~~~~~~ h5_dev merge success! ~~~~~~~~~~~~~~~'
-]
+ src/pages/web/index.vue            | 173 +++++++++++++++++----
+ 1 files changed, 258 insertions(+), 27 deletions(-)
+[git-auto-commit] git push origin h5_dev
+To git.xxx.com:xxx/xxxx.git
+   9fe90a202..da7953125  h5_dev -> h5_dev
+[git-auto-commit] end <- 合并： feature/1019 到 h5_dev 分支
+[git-auto-commit] wx_dev merge success!,h5_dev merge success!
+[git-auto-commit] git checkout dev/1019
+Switched to branch 'dev/1019'
+Your branch is up to date with 'origin/dev/1019'.
+[git-auto-commit] 执行结束
 ```
 

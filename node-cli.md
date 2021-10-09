@@ -213,6 +213,29 @@ What do you think of Node.js? Nice
 Thank you for your valuable feedback: Nice
 ```
 
+### chalk 模块：命令行样式美化
+[chalk](https://www.npmjs.com/package/chalk)用于美化输出的命令行颜色等样式
+安装：
+```
+npm install --save chalk
+```
+示例：打印输出
+```js
+#!/usr/bin/env node
+const chalk = require('chalk')
+
+console.log(chalk.blueBright('blueBright color'))
+console.log(chalk.greenBright('greenBright color'))
+console.log(chalk.redBright('redBright color'))
+console.log(chalk.yellow('yellow color'))
+```
+执行：
+```
+./index.js
+```
+输出：
+![chalk](./img/chalk.png)
+
 ## 发布npm包
 1. 登录npm账号，如果没有账号，则去[npm网站注册](https://www.npmjs.com/signup)一个，或者使用`npm adduser`命令，提示输入账号，密码和邮箱，然后将提示创建成功，如果已有账号，则用以下命令登录。查看是否登录：`npm whoami`。
 ```
