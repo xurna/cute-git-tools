@@ -1,7 +1,7 @@
 {
     "name": "cute-git-tools",
-    "version": "1.0.3",
-    "description": "git自动化提交代码合并分支",
+    "version": "1.1.0",
+    "description": "git tools",
     "main": "./bin/index.js",
     "bin": {
         "git-auto-commit": "bin/index.js"
@@ -11,6 +11,10 @@
         "merge:cli": "git-auto-commit -m='feat: 优化' --target=master --sit=wx_dev,h5_dev"
     },
     "author": "xiaonayang",
+    "keywords": [
+        "git-auto-commit",
+        "git-tools"
+    ],
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/xurna/cute-git-tools/issues"

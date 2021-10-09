@@ -18,7 +18,7 @@
     '\n' +
     '✖ eslint . --fix --max-warnings 0:\n' +
     '\n' +
-    '/Users/kynana/wbProject/github/git-auto-commit/package.json\n' +
+    '/Users/xx/github/git-auto-commit/package.json\n' +
     '  2:11  error  Parsing error: Unexpected token :\n' +
     '\n' +
     '✖ 1 problem (1 error, 0 warnings)\n' +
