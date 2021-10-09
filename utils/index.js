@@ -1,4 +1,6 @@
 const shell = require('shelljs')
+const chalk = require('chalk')
+const TAG = '[git-auto-commit]'
 
 /**
  *
@@ -8,11 +10,11 @@ const shell = require('shelljs')
 function gitMergeFunc (currentBranch, targetBranch) {
   return new Promise((resolve, reject) => {
     if (!targetBranch) return resolve()
-    console.log(`================= start合并： ${currentBranch} 到 ${targetBranch} 分支 =================`)
+    console.log(chalk.greenBright(TAG, `start合并： ${currentBranch} 到 ${targetBranch} 分支`))
     // 是否存在目标分支
     const isTargetExist = exec(`git ls-remote origin ${targetBranch}`).stdout
     if (!isTargetExist) {
-      console.log(`================= end合并： ${currentBranch} 到 ${targetBranch} 分支 =================`)
+      console.log(chalk.greenBright(TAG, `end合并： ${currentBranch} 到 ${targetBranch} 分支`))
       return reject(new Error(`${targetBranch} 目标分支不存在，请检查`))
     }
     exec(`git checkout ${targetBranch}`)
@@ -20,11 +22,11 @@ function gitMergeFunc (currentBranch, targetBranch) {
     const mergeTarget = exec(`git merge ${currentBranch}`)
     // 合并有冲突
     if (mergeTarget.stdout.indexOf('CONFLICT') > 0) {
-      console.log(`================= end合并： ${currentBranch} 到 ${targetBranch} 分支 =================`)
+      console.log(chalk.greenBright(TAG, `end合并： ${currentBranch} 到 ${targetBranch} 分支`))
       return reject(new Error(`有冲突，请手动解决！${targetBranch} merge failed `))
     } else {
       isTimeout(exec(`git push origin ${targetBranch}`))
-      console.log(`================= end合并： ${currentBranch} 到 ${targetBranch} 分支 =================`)
+      console.log(chalk.greenBright(TAG, `end合并： ${currentBranch} 到 ${targetBranch} 分支`))
       return resolve(`~~~~~~~~~~~~~~~ ${targetBranch} merge success! ~~~~~~~~~~~~~~~`)
     }
   })
@@ -36,7 +38,7 @@ function gitMergeFunc (currentBranch, targetBranch) {
  * @returns
  */
 function exec (command) {
-  shell.echo(`-> ${command}`)
+  shell.echo(chalk.cyanBright(TAG, `${command}`))
   return shell.exec(command)
 }
 
@@ -57,7 +59,7 @@ function isTimeout (commandResult) {
  * @param {String} word log
  */
 function echoAndExit (word) {
-  shell.echo(`！！！！！！！！！${word}！！！！！！！！！`)
+  shell.echo(chalk.redBright(TAG, `${word}`))
   shell.exit(1)
 }
 
