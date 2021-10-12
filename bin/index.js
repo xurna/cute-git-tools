@@ -67,7 +67,7 @@ rl.question(chalk.cyanBright(TAG, question), (answer) => {
     exec('git add .')
   }
   const commitStatus = exec(`git commit -m "${commit}"`)
-  if (commitStatus.stderr.indexOf('problem') > 0 || commitStatus.stderr.indexOf('error') > 0) {
+  if (commitStatus.stderr.indexOf('problem') > 0) {
     echoAndExit('eslint 不通过，请修改后提交')
   }
   // 判断远端是否有该分支
@@ -97,7 +97,7 @@ rl.question(chalk.cyanBright(TAG, question), (answer) => {
         console.log(chalk.yellow(TAG, deployResult)) // ['success','failed']
         exec(`git checkout ${currentBranch}`)
         console.log(chalk.cyanBright(TAG, '执行结束')) // ['success','failed']
-        shell.exit(1)
+        shell.exit(0)
       }).catch((err) => {
         rl.close()
         echoAndExit(err.message)
@@ -106,7 +106,7 @@ rl.question(chalk.cyanBright(TAG, question), (answer) => {
       exec(`git checkout ${currentBranch}`)
       console.log(chalk.cyanBright(TAG, '执行结束')) // ['success','failed']
       rl.close()
-      shell.exit(1)
+      shell.exit(0)
     }
   }).catch((err) => {
     rl.close()
