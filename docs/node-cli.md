@@ -74,7 +74,7 @@ git-auto-commit
 ```
 
 ## 编写命令行脚本
-编写命令行脚本有几个接口说明一下：
+编写命令行脚本有几个模块可以选择使用：
 ### process.argv
 `process.argv`返回一个数组，数组前两位是固定的，分别是node程序的路径和脚本存放的位置，从第三位开始才是额外输入的内容。
 ```js
@@ -213,6 +213,29 @@ What do you think of Node.js? Nice
 Thank you for your valuable feedback: Nice
 ```
 
+### inquirer模块
+[`inquirer`](https://www.npmjs.com/package/inquirer)模块跟 `readline` 模块有点类似，但是inquirer模块提供更加丰富的问询模式，例如，单选，多选，用户输入等，通过回调的方式处理回答的内容。
+```sh
+npm install --save inquirer
+```
+脚本
+```js
+#!/usr/bin/env node
+const inquirer = require('inquirer')
+inquirer
+  .prompt([{
+    type: 'input',
+    message: 'input a question: ',
+    name: 'answer'
+  }]).then((answers) => {
+    console.log(answers)
+  })
+  .catch((error) => {
+    console.log(error)
+  });
+```
+
+
 ### chalk 模块：命令行样式美化
 [chalk](https://www.npmjs.com/package/chalk)用于美化输出的命令行颜色等样式
 安装：
@@ -228,10 +251,6 @@ console.log(chalk.blueBright('blueBright color'))
 console.log(chalk.greenBright('greenBright color'))
 console.log(chalk.redBright('redBright color'))
 console.log(chalk.yellow('yellow color'))
-```
-执行：
-```
-./index.js
 ```
 输出：
 ![chalk](./img/chalk.png)
@@ -265,29 +284,4 @@ npm config set registry https://registry.npm.taobao.org
 - [shelljs](http://documentup.com/shelljs/shelljs#command-line-use)
 - [Building a simple command line tool with npm](https://blog.npmjs.org/post/118810260230/building-a-simple-command-line-tool-with-npm)
 
-
-
-
-是否提交当前所有改动？
-列出所有文件修改
-1
-2
-3
-4
-是
-否：
-请选择单独提交的文件：（多选）
-1
-2
-3
-4
-请输入提交备注comments：（可以使用git-zc提交）
-feat：
-chore
-fix
-提交完。
-确定执行合并流程xx->xx->xx?
-是
-否
-继续...
 
