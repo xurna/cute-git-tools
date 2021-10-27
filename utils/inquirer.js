@@ -29,7 +29,7 @@ function addFilesInquirer (data) {
 }
 
 /**
- * git add 命令确认选项
+ * git add 自定义选择文件确认选项
  */
 function addCustomFilesInquirer (data) {
   const { modifyFilesList } = data

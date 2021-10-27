@@ -28,7 +28,7 @@ const target = mergeConfig.target || ''
 // 将要合并target分支的sit分支（目标分支）
 const sit = mergeConfig.sit || ''
 const sitArr = (sit && sit.split(',')) || []
-const add = mergeConfig.add || 'auto'
+// const add = mergeConfig.add || 'auto'
 
 // 判断系统PATH是否存在git
 if (!shell.which('git')) {

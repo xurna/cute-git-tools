@@ -17,6 +17,7 @@ function gitMergeFunc (currentBranch, targetBranch) {
       console.log(chalk.greenBright(TAG, `end <- 合并： ${currentBranch} 到 ${targetBranch} 分支`))
       return reject(new Error(`${targetBranch} 目标分支不存在，请检查`))
     }
+
     // 合并的分支是同一个
     if (currentBranch === targetBranch) return resolve('No need to merge because of the same branch')
 
@@ -24,17 +25,18 @@ function gitMergeFunc (currentBranch, targetBranch) {
     if (checkoutOutput.indexOf('overwritten by checkout') > 0 && checkoutOutput.indexOf('error') > 0) {
       return reject(new Error('当前修改将被覆盖，请切分支前提交当前修改'))
     }
+
     exec(`git pull origin ${targetBranch}`)
     const mergeTarget = exec(`git merge ${currentBranch}`)
     // 合并有冲突
     if (mergeTarget.stdout.indexOf('CONFLICT') > 0) {
       console.log(chalk.greenBright(TAG, `end <- 合并： ${currentBranch} 到 ${targetBranch} 分支`))
       return reject(new Error(`合并有冲突，请手动解决！${targetBranch} merge failed! `))
-    } else {
-      isTimeout(exec(`git push origin ${targetBranch}`))
-      console.log(chalk.greenBright(TAG, `end <- 合并： ${currentBranch} 到 ${targetBranch} 分支`))
-      return resolve(`${targetBranch} merge success!`)
     }
+
+    isTimeout(exec(`git push origin ${targetBranch}`))
+    console.log(chalk.greenBright(TAG, `end <- 合并： ${currentBranch} 到 ${targetBranch} 分支`))
+    return resolve(`${targetBranch} merge success!`)
   })
 }
 
