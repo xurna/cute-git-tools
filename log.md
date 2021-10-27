@@ -106,3 +106,11 @@
     },
 }
 ```
+
+- 切分支
+```
+error: Your local changes to the following files would be overwritten by checkout:
+        README.md
+Please commit your changes or stash them before you switch branches.
+Aborting
+```

@@ -264,3 +264,30 @@ npm config set registry https://registry.npm.taobao.org
 - [Node.js 命令行程序开发教程](http://www.ruanyifeng.com/blog/2015/05/command-line-with-node.html)
 - [shelljs](http://documentup.com/shelljs/shelljs#command-line-use)
 - [Building a simple command line tool with npm](https://blog.npmjs.org/post/118810260230/building-a-simple-command-line-tool-with-npm)
+
+
+
+
+是否提交当前所有改动？
+列出所有文件修改
+1
+2
+3
+4
+是
+否：
+请选择单独提交的文件：（多选）
+1
+2
+3
+4
+请输入提交备注comments：（可以使用git-zc提交）
+feat：
+chore
+fix
+提交完。
+确定执行合并流程xx->xx->xx?
+是
+否
+继续...
+
