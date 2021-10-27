@@ -90,25 +90,24 @@ function commentsInquirerHandler () {
  * git merge 信息确认回调
  */
 function mergeInquirerHandler () {
-  // 判断远端是否有该分支
-  const isTargetExist = exec(`git ls-remote origin ${currentBranch}`)
-  if (isTargetExist.code !== 0) {
-    echoAndExit('执行超时，请重试')
-  } else {
-    if (!isTargetExist.stdout) {
-      isTimeout(exec(`git push --set-upstream origin ${currentBranch}`))
-    } else {
-      isTimeout(exec(`git push origin ${currentBranch}`))
-    }
-  }
-  console.log(chalk.greenBright(TAG, `end <- 提交当前分支 ${currentBranch} 代码`))
-
   mergeInquirer({ currentBranch, target, sit }).then((answers) => {
     const answer = answers.merge
     if (answer !== 'Y') {
       console.log(chalk.cyanBright(TAG, '执行已取消'))
       shell.exit(1)
     }
+    // 判断远端是否有该分支
+    const isTargetExist = exec(`git ls-remote origin ${currentBranch}`)
+    if (isTargetExist.code !== 0) {
+      echoAndExit('执行超时，请重试')
+    } else {
+      if (!isTargetExist.stdout) {
+        isTimeout(exec(`git push --set-upstream origin ${currentBranch}`))
+      } else {
+        isTimeout(exec(`git push origin ${currentBranch}`))
+      }
+    }
+    console.log(chalk.greenBright(TAG, `end <- 提交当前分支 ${currentBranch} 代码`))
 
     exec('git status')
 
