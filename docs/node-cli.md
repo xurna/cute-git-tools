@@ -122,7 +122,7 @@ hello world
 ```
 `hideBin`相当于`process.argv.slice(2)`，`yargs`模块的作用就是美化得到的命令行参数，获取参数为一个对象，方便取值。`argv` 对象有一个下划线（_）属性，可以获取非连词线开头的参数。
 ### child_process
-脚本可以通过 `child_process` 模块新建子进程，从而执行 Unix 系统命令。
+脚本可以通过node下面的 `child_process` 模块新建子进程，从而执行 Unix 系统命令。
 ```js
 #!/usr/bin/env node
 const name = process.argv[2];
@@ -143,7 +143,8 @@ hello world
 ```
 
 ### shelljs 模块
-[`shelljs`](http://documentup.com/shelljs/shelljs#installing)是可以使用`Unix shell`命令在(Windows/Linux/macOS)系统上执行的兼容库。
+[`shelljs`](http://documentup.com/shelljs/shelljs#installing)可以兼容在(Windows/Linux/macOS)系统中执行`Unix shell`命令。
+
 安装：
 ```
 npm install --save shelljs
@@ -183,11 +184,8 @@ hello world
 }
 ```
 ### readline 模块
-[`readline`](http://nodejs.cn/api/readline.html)模块提供了用于从可读流（例如 process.stdin）每次一行地读取数据的接口。
-安装：
-```
-npm install --save readline
-```
+node中的[`readline`](http://nodejs.cn/api/readline.html)模块提供了用于从可读流（例如 process.stdin）每次一行地读取数据的接口。
+
 示例：可以用来读取用户输入
 ```js
 #!/usr/bin/env node
@@ -213,7 +211,7 @@ What do you think of Node.js? Nice
 Thank you for your valuable feedback: Nice
 ```
 
-### inquirer模块
+### inquirer 模块
 [`inquirer`](https://www.npmjs.com/package/inquirer)模块跟 `readline` 模块有点类似，但是inquirer模块提供更加丰富的问询模式，例如，单选，多选，用户输入等，通过回调的方式处理回答的内容。
 ```sh
 npm install --save inquirer
