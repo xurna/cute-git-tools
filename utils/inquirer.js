@@ -55,7 +55,11 @@ function commentsInquirer (data) {
   const promptObj = {
     type: 'input',
     message: '请输入提交备注comments：',
-    name: 'comments'
+    name: 'comments',
+    validate (value) {
+      if (value.length > 0) return true
+      return 'Please input commit comments.'
+    }
   }
   commit && (promptObj.default = commit)
   return inquirer
