@@ -74,6 +74,11 @@
   uniq: [Function: bound ]
 } 
 ```
+
+```js
+ DONE  No lint errors found!
+```
+
 - 合并冲突
 ```js
 [String: 'Auto-merging bin/index.js\n' +

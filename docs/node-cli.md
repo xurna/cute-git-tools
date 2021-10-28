@@ -95,7 +95,7 @@ console.log(process.argv);
 ]
 ```
 ### yargs 模块
-`yargs`通过解析参数和生成优雅的用户界面来构建交互式命令行工具。
+[`yargs`](https://github.com/yargs/yargs)通过解析参数和生成优雅的用户界面来构建交互式命令行工具。
 安装：
 ```
 npm install --save yargs
@@ -121,6 +121,7 @@ console.log('hello', argv.name)
 hello world
 ```
 `hideBin`相当于`process.argv.slice(2)`，`yargs`模块的作用就是美化得到的命令行参数，获取参数为一个对象，方便取值。`argv` 对象有一个下划线（_）属性，可以获取非连词线开头的参数。
+
 ### child_process
 脚本可以通过node下面的 `child_process` 模块新建子进程，从而执行 Unix 系统命令。
 ```js
@@ -183,6 +184,7 @@ hello world
   uniq: [Function: bound ]
 }
 ```
+
 ### readline 模块
 node中的[`readline`](http://nodejs.cn/api/readline.html)模块提供了用于从可读流（例如 process.stdin）每次一行地读取数据的接口。
 
@@ -253,6 +255,11 @@ console.log(chalk.yellow('yellow color'))
 输出：
 ![chalk](./img/chalk.png)
 
+### 更多模块
+1. [`ora`](https://www.npmjs.com/package/ora)：优雅的终端loading展示。
+2. [`Inquirer`](https://www.npmjs.com/package/inquirer)：一组常见的交互式命令行用户界面。
+3. [`commander`](https://www.npmjs.com/package/commander)：node.js 命令行界面的完整解决方案。
+
 ## 发布npm包
 1. 登录npm账号，如果没有账号，则去[npm网站注册](https://www.npmjs.com/signup)一个，或者使用`npm adduser`命令，提示输入账号，密码和邮箱，然后将提示创建成功，如果已有账号，则用以下命令登录。查看是否登录：`npm whoami`。
 ```
@@ -277,7 +284,7 @@ npm publish
 npm config set registry https://registry.npm.taobao.org
 ```
 
-## 参考文档：
+## 更多阅读
 - [Node.js 命令行程序开发教程](http://www.ruanyifeng.com/blog/2015/05/command-line-with-node.html)
 - [shelljs](http://documentup.com/shelljs/shelljs#command-line-use)
 - [Building a simple command line tool with npm](https://blog.npmjs.org/post/118810260230/building-a-simple-command-line-tool-with-npm)

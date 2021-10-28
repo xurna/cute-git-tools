@@ -1,3 +1,6 @@
+# v1.1.1
+## features
+1. Optimize the commit process
 # v1.1.0
 ## features
 1. The git-auto-commit command adds the command line parameter --sit's alias to -s.
