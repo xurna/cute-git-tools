@@ -39,13 +39,13 @@ console.log(chalk.greenBright(TAG, '自动化提交git脚本即将开始执行')
 
 exec('git status')
 
-const gitStatusOfModifyFilesOutput = exec('git status -s | cut -c4-', { silent: true }).stdout
+const gitStatusOfModifyFilesOutput = exec('git status -s', { silent: true }).stdout
 const modifyFilesList = getModifyFilesList(gitStatusOfModifyFilesOutput)
 try {
-  // 提交当前分支
-  console.log(chalk.greenBright(TAG, `start -> 提交当前分支 ${currentBranch} 代码`))
   // 有改动
   if (modifyFilesList.length > 0) {
+    // 提交当前分支
+    console.log(chalk.greenBright(TAG, `start -> 提交当前分支 ${currentBranch} 代码`))
     addFilesInquirer({ currentBranch }).then((answers) => {
       const addFilesType = answers.type
       if (addFilesType === 'all') {
@@ -77,7 +77,7 @@ function commentsInquirerHandler () {
     const comments = answers.comments
     if (comments) {
       const commitStatus = exec(`git commit -m "${comments}"`)
-      if (commitStatus.stderr.indexOf('problem') > 0 || commitStatus.stderr.indexOf('error') > 0) {
+      if (commitStatus.stderr.indexOf('problem') > -1 || commitStatus.stderr.indexOf('error') > -1) {
         echoAndExit('eslint 不通过，请修改后提交')
       }
     }

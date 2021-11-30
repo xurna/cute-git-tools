@@ -5,8 +5,6 @@
 - [git](https://git-scm.com/downloads)
 ## 安装
 ```
-npm install --save-dev cute-git-tools
-or
 npm install -g cute-git-tools
 ```
 
@@ -111,7 +109,7 @@ Changes not staged for commit:
         modified:   README.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
-[git-auto-commit] git status -s | cut -c4-
+[git-auto-commit] git status -s
 [git-auto-commit] start -> 提交当前分支 dev/cli 代码
 ? 是否提交当前分支 dev/cli 的所有改动？ all
 [git-auto-commit] git add .

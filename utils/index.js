@@ -21,17 +21,25 @@ function gitMergeFunc (currentBranch, targetBranch) {
     // 合并的分支是同一个
     if (currentBranch === targetBranch) return resolve('No need to merge because of the same branch')
 
-    const checkoutOutput = exec(`git checkout ${targetBranch}`).stdout
-    if (checkoutOutput.indexOf('overwritten by checkout') > 0 && checkoutOutput.indexOf('error') > 0) {
-      return reject(new Error('当前修改将被覆盖，请切分支前提交当前修改'))
+    const checkoutExec = exec(`git checkout ${targetBranch}`)
+    const checkoutOutput = checkoutExec.stdout
+    const checkoutError = checkoutExec.stderr
+    console.log('checkout exec:', checkoutOutput, checkoutError)
+    if ((checkoutOutput.indexOf('overwritten by checkout') > -1 && checkoutOutput.indexOf('error') > -1) || checkoutError.indexOf('error') > -1) {
+      return reject(new Error('当前提示error，请检查'))
     }
 
     exec(`git pull origin ${targetBranch}`)
     const mergeTarget = exec(`git merge ${currentBranch}`)
     // 合并有冲突
-    if (mergeTarget.stdout.indexOf('CONFLICT') > 0) {
+    if (mergeTarget.stdout.indexOf('CONFLICT') > -1) {
       console.log(chalk.greenBright(TAG, `end <- 合并： ${currentBranch} 到 ${targetBranch} 分支`))
       return reject(new Error(`合并有冲突，请手动解决！${targetBranch} merge failed! `))
+    }
+
+    if (mergeTarget.stdout.indexOf('error') > -1 || mergeTarget.stderr.indexOf('error') > -1) {
+      console.log(chalk.greenBright(TAG, `end <- 合并： ${currentBranch} 到 ${targetBranch} 分支`))
+      return reject(new Error('当前提示error，请检查'))
     }
 
     isTimeout(exec(`git push origin ${targetBranch}`))
@@ -81,7 +89,8 @@ function getModifyFilesList (modifyStr) {
   const filesList = modifyStr.split('\n')
   const filesFormat = []
   filesList.map(item => {
-    item && filesFormat.push({ name: item, value: item })
+    const file = item.slice(3)
+    item && filesFormat.push({ name: file, value: file })
     return item
   })
   return filesFormat
@@ -94,7 +103,7 @@ function getModifyFilesList (modifyStr) {
 function finishProgram (currentBranch) {
   exec(`git checkout ${currentBranch}`)
   console.log(chalk.cyanBright(TAG, '执行结束')) // ['success','failed']
-  shell.exit(1)
+  shell.exit(0)
 }
 
 module.exports = {
