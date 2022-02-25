@@ -1,7 +1,7 @@
 # git 工具库
 
 ## 环境
-- [node](https://nodejs.org/zh-cn/)
+- [node](https://nodejs.org/zh-cn/),node > v7.6.0
 - [git](https://git-scm.com/downloads)
 ## 安装
 ```

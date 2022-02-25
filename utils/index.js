@@ -1,7 +1,11 @@
 const shell = require('shelljs')
 const chalk = require('chalk')
 const TAG = '[git-auto-commit]'
-
+const Logger = require('../utils/logger')
+const logger = new Logger(TAG)
+const CODE = {
+  SUCCESS_CODE: 0
+}
 /**
  * 合并分支
  * @param {String} currentBranch 源分支
@@ -10,40 +14,22 @@ const TAG = '[git-auto-commit]'
 function gitMergeFunc (currentBranch, targetBranch) {
   return new Promise((resolve, reject) => {
     if (!targetBranch) return resolve()
-    console.log(chalk.greenBright(TAG, `start -> 合并： ${currentBranch} 到 ${targetBranch} 分支`))
-    // 是否存在目标分支
-    const isTargetExist = exec(`git ls-remote origin ${targetBranch}`).stdout
-    if (!isTargetExist) {
-      console.log(chalk.greenBright(TAG, `end <- 合并： ${currentBranch} 到 ${targetBranch} 分支`))
-      return reject(new Error(`${targetBranch} 目标分支不存在，请检查`))
-    }
-
     // 合并的分支是同一个
-    if (currentBranch === targetBranch) return resolve('No need to merge because of the same branch')
-
-    const checkoutExec = exec(`git checkout ${targetBranch}`)
-    const checkoutOutput = checkoutExec.stdout
-    const checkoutError = checkoutExec.stderr
-    console.log('checkout exec:', checkoutOutput, checkoutError)
-    if ((checkoutOutput.indexOf('overwritten by checkout') > -1 && checkoutOutput.indexOf('error') > -1) || checkoutError.indexOf('error') > -1) {
-      return reject(new Error('当前提示error，请检查'))
+    if (currentBranch === targetBranch) {
+      logger.warn(`Branch "${currentBranch}" no need to merge "${targetBranch}" because of the same branch`)
+      return resolve()
     }
 
+    logger.highlight(`start -> 合并： ${currentBranch} 到 ${targetBranch} 分支`)
+
+    // 是否存在目标分支
+    exec(`git ls-remote origin ${targetBranch}`)
+    exec(`git checkout ${targetBranch}`)
     exec(`git pull origin ${targetBranch}`)
-    const mergeTarget = exec(`git merge ${currentBranch}`)
-    // 合并有冲突
-    if (mergeTarget.stdout.indexOf('CONFLICT') > -1) {
-      console.log(chalk.greenBright(TAG, `end <- 合并： ${currentBranch} 到 ${targetBranch} 分支`))
-      return reject(new Error(`合并有冲突，请手动解决！${targetBranch} merge failed! `))
-    }
+    exec(`git merge ${currentBranch}`)
+    exec(`git push origin ${targetBranch}`)
 
-    if (mergeTarget.stdout.indexOf('error') > -1 || mergeTarget.stderr.indexOf('error') > -1) {
-      console.log(chalk.greenBright(TAG, `end <- 合并： ${currentBranch} 到 ${targetBranch} 分支`))
-      return reject(new Error('当前提示error，请检查'))
-    }
-
-    isTimeout(exec(`git push origin ${targetBranch}`))
-    console.log(chalk.greenBright(TAG, `end <- 合并： ${currentBranch} 到 ${targetBranch} 分支`))
+    logger.highlight(`end <- 合并： ${currentBranch} 到 ${targetBranch} 分支`)
     return resolve(`${targetBranch} merge success!`)
   })
 }
@@ -56,7 +42,18 @@ function gitMergeFunc (currentBranch, targetBranch) {
  */
 function exec (command, options) {
   shell.echo(chalk.cyanBright(TAG, `${command}`))
-  return shell.exec(command, options)
+  // return new Promise((resolve, reject) => {
+  const execResult = shell.exec(command, options)
+  const execInfo = {
+    code: execResult.code,
+    message: execResult.stderr,
+    output: execResult.stdout
+  }
+  if (execResult.code !== CODE.SUCCESS_CODE) {
+    throw execInfo
+  }
+  return execInfo
+  // })
 }
 
 /**
@@ -102,7 +99,7 @@ function getModifyFilesList (modifyStr) {
  */
 function finishProgram (currentBranch) {
   exec(`git checkout ${currentBranch}`)
-  console.log(chalk.cyanBright(TAG, '执行结束')) // ['success','failed']
+  logger.info('执行结束') // ['success','failed']
   shell.exit(0)
 }
 
