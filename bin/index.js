@@ -115,7 +115,9 @@ function mergeInquirerHandler () {
       if (sitArr.length > 0) {
         for (let i = 0; i < sitArr.length; i++) {
           const sitBranch = sitArr[i]
-          promiseFunc.push(gitMergeFunc(target || currentBranch, sitBranch))
+          promiseFunc.push(gitMergeFunc(target || currentBranch, sitBranch).catch((err) => {
+            Promise.reject(err)
+          }))
         }
         Promise.all(promiseFunc).then((deployResult) => {
           logger.warn(deployResult) // ['success','failed']
